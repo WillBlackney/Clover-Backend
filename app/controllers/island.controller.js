@@ -1,6 +1,6 @@
 const Island = require("../models/island.model.js");
 
-// Create and Save a new Room
+// Create and Save a new Island
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -9,13 +9,16 @@ exports.create = (req, res) => {
       });
     }
   
-    // Create a Room
+    // Create an island
     const island = new Island({
       island_id: req.body.island_id,
       room_id: req.body.room_id,
+      current_temperature: req.body.current_temperature,
+      current_humidity: req.body.current_humidity,
+      current_fan_speed: req.body.current_fan_speed,
      });
   
-    // Save Room in the database
+    // Save Island in the database
     Island.create(island, (err, data) => {
       if (err)
         res.status(500).send({
@@ -27,7 +30,7 @@ exports.create = (req, res) => {
   };
 
 
-// Retrieve all Rooms from the database.
+// Retrieve all Islands from the database.
 exports.findAll = (req, res) => {
     Island.getAll((err, data) => {
       if (err)
@@ -38,7 +41,7 @@ exports.findAll = (req, res) => {
       else res.send(data);
     });
   };
-// Find a single Room with a RoomId
+// Find a single Island with a IslandID
 exports.findOne = (req, res) => {
     Island.findById(req.params.island_id, (err, data) => {
       if (err) {
@@ -55,7 +58,7 @@ exports.findOne = (req, res) => {
     });
   };
 
-// Update a Room identified by the RoomId in the request
+// Update a Island identified by the IslandID in the request
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body) {
@@ -82,7 +85,7 @@ exports.update = (req, res) => {
       }
     );
   };
-// Delete a Room with the specified RoomId in the request
+// Delete a Island with the specified IslandId in the request
 exports.delete = (req, res) => {
     Island.remove(req.params.island_id, (err, data) => {
       if (err) {
@@ -98,7 +101,7 @@ exports.delete = (req, res) => {
       } else res.send({ message: `Island was deleted successfully!` });
     });
   };
-// Delete all Rooms from the database.
+// Delete all Islands from the database.
 exports.deleteAll = (req, res) => {
     Island.removeAll((err, data) => {
       if (err)

@@ -1,22 +1,22 @@
 module.exports = app => {
     const island = require("../controllers/island.controller.js");
   
-    // Create a new Customer
+    // Create a new island
     app.post("/island", island.create);
   
-    // Retrieve all island
+    // Retrieve all islands
     app.get("/island", island.findAll);
   
-    // Retrieve a single Customer with customerId
+    // Retrieve a single island with island id
     app.get("/island/:island_id", island.findOne);
   
-    // Update a Customer with customerId
+    // Update a island with island id
     app.put("/island/:island_id", island.update);
   
-    // Delete a Customer with customerId
+    // Delete a island with island id
     app.delete("/island/:island_id", island.delete);
   
-    // Create a new Customer
+    // Create a new island
     app.delete("/island", island.deleteAll);
 
 };

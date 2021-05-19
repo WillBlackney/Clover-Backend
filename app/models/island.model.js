@@ -4,6 +4,9 @@ const sql = require("./db.js");
 const Island = function(island) {
     this.island_id = island.island_id;
     this.room_id = island.room_id;
+    this.current_temperature = island.current_temperature;
+    this.current_humidity = island.current_humidity;
+    this.current_fan_speed = current_fan_speed;
 };
 
 Island.create = (newIsland, result) =>{

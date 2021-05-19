@@ -1,6 +1,6 @@
 const Preference = require("../models/preference.model.js");
 
-// Create and Save a new Room
+// Create and Save a new Preference
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -9,7 +9,7 @@ exports.create = (req, res) => {
       });
     }
   
-    // Create a Room
+    // Create a Preference
     const preference = new Preference({
       preference_id: req.body.preference_id,
       user_id: req.body.user_id,
@@ -19,7 +19,7 @@ exports.create = (req, res) => {
       fanspeed: req.body.fanspeed,
      });
   
-    // Save Room in the database
+    // Save Preference in the database
     Preference.create(preference, (err, data) => {
       if (err)
         res.status(500).send({
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
   };
 
 
-// Retrieve all Rooms from the database.
+// Retrieve all Preferences from the database.
 exports.findAll = (req, res) => {
     Preference.getAll((err, data) => {
       if (err)
@@ -42,7 +42,7 @@ exports.findAll = (req, res) => {
       else res.send(data);
     });
   };
-// Find a single Room with a RoomId
+// Find a single Preference with a PreferenceID
 exports.findOne = (req, res) => {
     Preference.findById(req.params.preference_id, (err, data) => {
       if (err) {
@@ -59,7 +59,7 @@ exports.findOne = (req, res) => {
     });
   };
 
-// Update a Room identified by the RoomId in the request
+// Update a Preference identified by the PreferenceID in the request
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body) {
@@ -86,7 +86,7 @@ exports.update = (req, res) => {
       }
     );
   };
-// Delete a Room with the specified RoomId in the request
+// Delete a Preference with the specified PreferenceID in the request
 exports.delete = (req, res) => {
     Preference.remove(req.params.preference_id, (err, data) => {
       if (err) {
@@ -102,7 +102,7 @@ exports.delete = (req, res) => {
       } else res.send({ message: `Preference was deleted successfully!` });
     });
   };
-// Delete all Rooms from the database.
+// Delete all Preferences from the database.
 exports.deleteAll = (req, res) => {
     Preference.removeAll((err, data) => {
       if (err)

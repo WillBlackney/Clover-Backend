@@ -1,6 +1,6 @@
 const User = require("../models/user.model.js");
 
-// Create and Save a new Room
+// Create and Save a new User
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -9,14 +9,15 @@ exports.create = (req, res) => {
       });
     }
   
-    // Create a Room
+    // Create a User
     const user = new User({
         user_id: req.body.user_id,
       email: req.body.email,
       password: req.body.password,
+      my_current_island: req.body.my_current_island,
      });
   
-    // Save Room in the database
+    // Save User in the database
     User.create(user, (err, data) => {
       if (err)
         res.status(500).send({
@@ -28,7 +29,7 @@ exports.create = (req, res) => {
   };
 
 
-// Retrieve all Rooms from the database.
+// Retrieve all Users from the database.
 exports.findAll = (req, res) => {
     User.getAll((err, data) => {
       if (err)
@@ -40,7 +41,7 @@ exports.findAll = (req, res) => {
     });
   };
 
-// Find a single Room with a RoomId
+// Find a single User with a UserID
 exports.findOne = (req, res) => {
     User.findById(req.params.user_id, (err, data) => {
       if (err) {
@@ -57,7 +58,7 @@ exports.findOne = (req, res) => {
     });
   };
 
-// Update a Room identified by the RoomId in the request
+// Update a User identified by the UserID in the request
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body) {
@@ -85,7 +86,7 @@ exports.update = (req, res) => {
     );
   };
 
-// Delete a Room with the specified RoomId in the request
+// Delete a User with the specified UserID in the request
 exports.delete = (req, res) => {
     User.remove(req.params.user_id, (err, data) => {
       if (err) {
@@ -102,7 +103,7 @@ exports.delete = (req, res) => {
     });
   };
 
-// Delete all Rooms from the database.
+// Delete all Users from the database.
 exports.deleteAll = (req, res) => {
     User.removeAll((err, data) => {
       if (err)
