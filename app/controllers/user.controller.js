@@ -41,6 +41,7 @@ exports.findAll = (req, res) => {
     });
   };
 
+  
 // Find a single User with a UserID
 exports.findOne = (req, res) => {
     User.findById(req.params.user_id, (err, data) => {
@@ -57,6 +58,23 @@ exports.findOne = (req, res) => {
       } else res.send(data);
     });
   };
+
+// Find a single User BY EMAIL
+exports.findByEmail = (req, res) => {
+  User.findByEmail(req.params.email, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found User with email ${req.params.email}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving user with email " + req.params.email
+        });
+      }
+    } else res.send(data);
+  });
+};
 
 // Update a User identified by the UserID in the request
 exports.update = (req, res) => {
